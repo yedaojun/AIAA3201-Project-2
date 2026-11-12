@@ -1,0 +1,11 @@
+# Install into .venv-part2; CUDA torch/torchvision are inherited from aiaa3201.
+numpy==1.26.4
+opencv-python==4.11.0.86
+scipy==1.15.3
+scikit-learn==1.6.1
+pandas==2.2.3
+faiss-cpu==1.10.0
+tifffile==2025.5.10
+PyYAML
+tqdm
+matplotlib

@@ -1,0 +1,9 @@
+# Keep Python source bytes stable for experiment implementation fingerprints.
+*.py text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.svg text eol=lf
+# Manifests/checksums use the actual serialized bytes; do not rewrite their endings.
+*.json -text
+*.csv -text
+*.png binary

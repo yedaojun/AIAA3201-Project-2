@@ -1,0 +1,28 @@
+__pycache__/
+*.pyc
+.venv*/
+data/
+models/
+results/
+tmp/
+third_party/
+*.zip
+*.tar
+*.whl
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+.vscode/
+.codex/
+.agents/
+
+# Course handouts remain local; the repository contains our implementation.
+/Project*.pdf
+/project_AIAA3201_reminder*.pdf
+/Part1_Part2_流程与结果总结.md

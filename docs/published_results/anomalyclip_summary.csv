@@ -1,0 +1,2 @@
+﻿method_id,category_count,seed_count,seed_note,image_auroc_mean,pixel_auroc_mean,image_ap_mean,accuracy_mean,inference_ms_mean_mean,gpu_peak_memory_mb
+official_anomalyclip,6,1,one prespecified run; not a few-shot seed-stability experiment,0.89535,0.9580519226125551,0.9390277556962956,0.7941666666666666,222.82216327072192,1878.6748046875

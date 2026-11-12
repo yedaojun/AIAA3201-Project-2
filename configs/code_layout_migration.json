@@ -1,0 +1,30 @@
+{
+  "files": [
+    {
+      "sha256": "1fa67faaaaab2932ff6614983ed2136f722b2fdeacb3e7232c1f7ead1e267fc9",
+      "new_path": "experiment_utils/common.py",
+      "old_path": "anomaly_extensions/common.py",
+      "content_unchanged": true
+    },
+    {
+      "sha256": "577768bdbc4ae57d9acb2e7b9c09d176294ce8b9764ca4b6e5442972295a506b",
+      "new_path": "experiment_utils/evaluate.py",
+      "old_path": "anomaly_extensions/evaluate.py",
+      "content_unchanged": true
+    },
+    {
+      "sha256": "b6a5cee4ee975417bf277a8d0e5cedcfeaad5eff75e56c74b2f2d19c7410255e",
+      "new_path": "Part1/autoencoder/model.py",
+      "old_path": "anomaly_extensions/autoencoder.py",
+      "content_unchanged": true
+    },
+    {
+      "sha256": "fb27bb70142d3b5bfb93118579b1964fe26b26c23a15d5164e7a44bb0fcc6c5f",
+      "new_path": "Part2/anomalyclip/model.py",
+      "old_path": "anomaly_extensions/clip.py",
+      "content_unchanged": true
+    }
+  ],
+  "legacy_entrypoints": "tmp/legacy_extensions_before_split",
+  "description": "Separate Part 1 autoencoder and Part 2 AnomalyCLIP; model and evaluator source bytes preserved"
+}

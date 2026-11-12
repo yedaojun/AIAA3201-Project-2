@@ -1,0 +1,2 @@
+﻿method_id,category_count,seed_count,seed_note,image_auroc_mean,pixel_auroc_mean,image_ap_mean,accuracy_mean,inference_ms_mean_mean,gpu_peak_memory_mb
+compact_autoencoder,6,1,one prespecified run; not a few-shot seed-stability experiment,0.8335611111111111,0.722046068571879,0.8893313327590741,0.7119444444444444,74.6199894098254,18.68505859375
