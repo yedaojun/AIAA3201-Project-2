@@ -96,7 +96,9 @@ def evaluate_category(predictor, category, output, settings, run_signature, trai
     px_auc, total, positives = exact_pixel_auc(rows, category, folder)
     labels, scores = [r['label'] for r in rows], [r['score'] for r in rows]
     counts = {k: sum(r['outcome'] == k for r in rows) for k in ('TP', 'TN', 'FP', 'FN')}
+    experiment_seed = settings.get('config', {}).get('training_seed', settings.get('inference_seed', 111))
     metrics = {'method_id': settings['method_id'], 'category': category, 'run_signature': run_signature,
+               'experiment_seed': experiment_seed,
                'image_auroc': float(roc_auc_score(labels, scores)), 'image_ap': float(average_precision_score(labels, scores)),
                'pixel_auroc': px_auc, 'pixel_count': total, 'anomalous_pixels': positives,
                'threshold': threshold, 'test_images': len(rows), **counts,
@@ -117,7 +119,8 @@ def summarize(output, metrics, settings):
     flat = [{k: v for k, v in m.items() if k not in ('training', 'calibration_files')} for m in metrics]
     save_csv(output / 'summary_by_category.csv', flat)
     summary = {'method_id': settings['method_id'], 'category_count': len(metrics),
-               'seed_count': 1, 'seed_note': 'one prespecified run; not a few-shot seed-stability experiment'}
+               'seed_count': 1, 'experiment_seed': metrics[0]['experiment_seed'],
+               'seed_note': 'one actual seed in this directory; see parent multiseed summary for repeated runs'}
     for key in ('image_auroc', 'pixel_auroc', 'image_ap', 'accuracy', 'inference_ms_mean'):
         summary[key + '_mean'] = float(np.mean([m[key] for m in metrics]))
     summary['gpu_peak_memory_mb'] = max(m['gpu_peak_memory_mb'] for m in metrics)
@@ -138,6 +141,7 @@ def summarize(output, metrics, settings):
                 source = DATA / category / row['file']
                 mask = DATA / category / 'ground_truth/bad' / (source.stem + '.png') if int(row['label']) else None
                 images.append({'method_id': settings['method_id'], 'run_id': metric['run_signature'],
+                               'experiment_seed': metric['experiment_seed'],
                                'sample_id': f'VisA/1cls/{category}/{row["file"]}',
                                'image_file': source.relative_to(ROOT).as_posix(), 'image_sha256': sha256(source),
                                'ground_truth_mask': mask.relative_to(ROOT).as_posix() if mask else '',

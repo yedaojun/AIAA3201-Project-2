@@ -1,0 +1,14 @@
+{
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "torch": "2.7.1+cu126",
+  "threads": 4,
+  "method_order": [
+    "baseline_rgb_template",
+    "official_anomalydino",
+    "compact_autoencoder",
+    "official_anomalyclip"
+  ],
+  "serial_queries": true,
+  "input_selection": "first 10 sorted good and bad test files per category; 120 unique inputs per method",
+  "notes": "Methods retain their declared preprocessing and supervision; this is a shared-hardware latency comparison, not matched accuracy training."
+}

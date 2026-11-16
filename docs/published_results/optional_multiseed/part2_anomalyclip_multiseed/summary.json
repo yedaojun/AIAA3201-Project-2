@@ -1,0 +1,24 @@
+{
+  "method_id": "official_anomalyclip",
+  "seed_count": 3,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "category_count": 6,
+  "unique_test_images": 960,
+  "total_test_predictions": 2880,
+  "aggregation": "equal mean over six categories within each seed, then mean and sample SD over three seeds",
+  "protocol_note": "Optional extension with its own training/supervision; not the matched few-shot reference-group experiment.",
+  "image_auroc_mean": 0.89535,
+  "image_auroc_std": 0.0,
+  "pixel_auroc_mean": 0.9580519226125551,
+  "pixel_auroc_std": 0.0,
+  "accuracy_mean": 0.7941666666666667,
+  "accuracy_std": 0.0,
+  "image_ap_mean": 0.9390277556962956,
+  "image_ap_std": 0.0,
+  "identical_scores_and_decisions_across_seeds": true,
+  "maximum_score_difference": 0.0
+}

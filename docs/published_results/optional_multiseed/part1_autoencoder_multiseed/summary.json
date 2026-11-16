@@ -1,0 +1,22 @@
+{
+  "method_id": "compact_autoencoder",
+  "seed_count": 3,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "category_count": 6,
+  "unique_test_images": 960,
+  "total_test_predictions": 2880,
+  "aggregation": "equal mean over six categories within each seed, then mean and sample SD over three seeds",
+  "protocol_note": "Optional extension with its own training/supervision; not the matched few-shot reference-group experiment.",
+  "image_auroc_mean": 0.8274111111111111,
+  "image_auroc_std": 0.018393329440349642,
+  "pixel_auroc_mean": 0.6959302276621733,
+  "pixel_auroc_std": 0.044904062144855095,
+  "accuracy_mean": 0.6928935185185185,
+  "accuracy_std": 0.028445306835523446,
+  "image_ap_mean": 0.8839014355784234,
+  "image_ap_std": 0.008654150463478788
+}

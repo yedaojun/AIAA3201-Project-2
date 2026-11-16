@@ -14,9 +14,14 @@ from .model import AutoencoderPredictor, TRAIN_CONFIG, train_category
 def main():
     parser = argparse.ArgumentParser(description='Part 1 optional convolutional autoencoder')
     parser.add_argument('--categories', nargs='+', choices=CATEGORIES, default=list(CATEGORIES))
-    parser.add_argument('--output', type=Path, default=ROOT / 'results/part1_autoencoder')
+    parser.add_argument('--output', type=Path, default=None)
+    parser.add_argument('--seed', type=int, default=111)
     parser.add_argument('--train-only', action='store_true')
     args = parser.parse_args()
+    args.output = args.output or (ROOT / 'results/part1_autoencoder' if args.seed == 111 else
+                                  ROOT / 'results/part1_autoencoder_multiseed' / f'seed_{args.seed}')
+    TRAIN_CONFIG['training_seed'] = args.seed
+    TRAIN_CONFIG['split_seed'] = 111
     configure()
     settings = {'method_id': 'compact_autoencoder', 'protocol': 'additional normal-only trained reconstruction baseline; not few-shot',
                 'config': TRAIN_CONFIG, 'map_storage': 'float32 working-size NPZ; original-size bilinear restore',
@@ -24,7 +29,10 @@ def main():
                 'map_range': [0, 1], 'manifest_sha256': sha256(MANIFEST),
                 'evaluation_sha256': sha256(ROOT / 'experiment_utils/evaluate.py'),
                 'common_sha256': sha256(ROOT / 'experiment_utils/common.py'), 'torch': torch.__version__}
-    write_json(args.output / 'run_config.json', settings)
+    config_file = args.output / 'run_config.json'
+    if config_file.exists() and json.loads(config_file.read_text()) != settings:
+        raise ValueError('Saved run settings differ. Choose a new --output directory to preserve the original experiment.')
+    write_json(config_file, settings)
     metrics = []
     for category in args.categories:
         checkpoint = train_category(category, args.output)

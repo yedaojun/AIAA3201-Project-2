@@ -1,0 +1,43 @@
+{
+  "method_id": "compact_autoencoder",
+  "protocol": "additional normal-only trained reconstruction baseline; not few-shot",
+  "config": {
+    "method": "Compact convolutional autoencoder",
+    "training_seed": 1,
+    "short_edge": 448,
+    "patch_multiple": 14,
+    "geometry": "same PIL bicubic short-edge resize and bottom/right crop as template baseline",
+    "channels": [
+      12,
+      24,
+      48,
+      64,
+      96
+    ],
+    "bottleneck_stride": 32,
+    "decoder": "transposed convolutions; no skip connections; sigmoid RGB output",
+    "epochs": 20,
+    "batch_size": 8,
+    "learning_rate": 0.001,
+    "optimizer": "Adam",
+    "loss": "mean squared RGB reconstruction error",
+    "normal_validation_fraction": 0.1,
+    "checkpoint_selection": "lowest normal validation MSE",
+    "calibration": "first 20 official sorted normal training files, excluded from fit and validation",
+    "augmentation": "none",
+    "mixed_precision_training": "CUDA float16 GradScaler",
+    "inference_precision": "FP32",
+    "test_label_tuning": false,
+    "split_seed": 111
+  },
+  "map_storage": "float32 working-size NPZ; original-size bilinear restore",
+  "score": "top ceil(1%) mean of RGB absolute reconstruction residual, Gaussian sigma=2",
+  "map_range": [
+    0,
+    1
+  ],
+  "manifest_sha256": "03b472382af50c35350095c29bc95b4c21a7e609c927418e6715e883497a196e",
+  "evaluation_sha256": "cd797d1c55bcdadcf2520de8306abbb3004775ee51dd9c417e13bcf70b11ff5b",
+  "common_sha256": "1fa67faaaaab2932ff6614983ed2136f722b2fdeacb3e7232c1f7ead1e267fc9",
+  "torch": "2.7.1+cu126"
+}

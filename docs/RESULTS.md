@@ -30,16 +30,17 @@ groups). This differs from its 96.15% macro Image AUROC.
 
 | Part | Method | Image AUROC (%) | Pixel AUROC (%) | Fitting / supervision |
 |---|---|---:|---:|---|
-| 1 | Compact convolutional autoencoder | 83.36 | 72.20 | 2,813 normal fitting + 312 normal validation images; six models, 20 epochs each |
+| 1 | Compact convolutional autoencoder | 82.74 | 69.59 | 2,813 normal fitting + 312 normal validation images; six models per seed, 20 epochs each, seeds 0/1/2 |
 | 2 | AnomalyCLIP | 89.54 | 95.81 | Official MVTec-trained prompts; zero VisA fitting/reference images |
 
-Both additionally use the prescribed 20 normal calibration images per category.
-These optional experiments each have one prespecified seed, not a three-seed
-stability estimate. Their supervision differs from the required few-shot methods.
+For OK/NG demonstrations, both additionally use the same 20 normal calibration images per category. The first-20/95th-percentile threshold is prescribed explicitly in Part 1; extending it to Part 2 and its optional model is our demo decision policy, not a mandatory AnomalyDINO scoring rule. Part 2 does explicitly require excluding the calibration images from reference selection. AUROC uses the unchanged pre-threshold scores.
+Autoencoder uses training seeds 0/1/2; AnomalyCLIP uses inference seeds 0/1/2 with a fixed model and no reference sampling. These CLIP repeats are not a few-shot stability test. Autoencoder Image/Pixel AUROC sample SD is 1.84/4.49 percentage points. AnomalyCLIP scores and maps are identical across inference seeds, so observed SD is zero. Their supervision differs from the required few-shot methods.
 AnomalyCLIP uses square 448 resizing rather than aspect-preserving geometry and
 does not claim an exact reproduction of the upstream default square-518 setting.
 
-![Optional per-category metrics](figures/published_optional_metrics.png)
+The following optional figures retain the original seed111 run for historical qualitative analysis; they are not the new three-seed mean. Current per-seed data are documented in [the repeated-run report](optional_multiseed.md).
+
+![Historical optional per-category metrics](figures/published_optional_metrics.png)
 
 ![Autoencoder normal-only learning curves](figures/published_autoencoder_training.png)
 
@@ -52,7 +53,7 @@ test image is classified TP, which does not establish correct defect localizatio
 
 AnomalyCLIP's global image-text score and local similarity maps are separate
 outputs. The tiny defect in candle bad/000.JPG remains a false negative at its
-prescribed calibration threshold.
+our normal-only calibrated demo threshold.
 
 ![AnomalyCLIP remaining tiny-defect false negative](figures/published_anomalyclip_candle.png)
 
@@ -74,3 +75,7 @@ Small numeric source tables are in [published_results](published_results/).
 Full per-image CSVs, floating anomaly maps, model checkpoints and audit outputs
 are generated under `results/` when running the documented commands and remain
 excluded from Git to keep the source repository small. There is no Part 3 result yet.
+
+## Learning-point analysis
+
+The original implementation summary did not fully explain why the method transfers or distinguish a patch-scale hypothesis from a demonstrated cause. See [the requirement audit and report-ready analysis](part1_part2_requirements_and_analysis.md) for the completed Part 1 pose/background/illumination discussion, Part 2 frozen-feature transfer explanation, and measured sparse-defect geometry. The updated PPT and narration expose these points directly.

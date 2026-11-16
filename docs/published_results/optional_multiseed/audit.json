@@ -1,0 +1,28 @@
+{
+  "part1_autoencoder_multiseed": {
+    "actual_seeds": [
+      0,
+      1,
+      2
+    ],
+    "category_runs": 18,
+    "test_predictions": 2880,
+    "maps_finite": true,
+    "maximum_score_difference": 0.598296083509922,
+    "identical_map_values_across_seeds": false,
+    "distinct_initial_training_losses": true,
+    "fixed_fit_validation_calibration_files": true
+  },
+  "part2_anomalyclip_multiseed": {
+    "actual_seeds": [
+      0,
+      1,
+      2
+    ],
+    "category_runs": 18,
+    "test_predictions": 2880,
+    "maps_finite": true,
+    "maximum_score_difference": 0.0,
+    "identical_map_values_across_seeds": true
+  }
+}

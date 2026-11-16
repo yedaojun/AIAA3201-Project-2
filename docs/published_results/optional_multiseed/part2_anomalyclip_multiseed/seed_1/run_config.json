@@ -1,0 +1,46 @@
+{
+  "method_id": "official_anomalyclip",
+  "protocol": "zero target reference images; external MVTec-supervised prompts; supplementary comparison",
+  "source_repo": "https://github.com/zqhang/AnomalyCLIP",
+  "source_commit": "3911738c0867544f545a076ad78f3f11d9ecbfdf",
+  "adapter_sha256": "30933bf83d77db11f12e5772a52b236d00f9fc6b6143c26765c308226ea18501",
+  "backbone": "OpenAI CLIP ViT-L/14@336px",
+  "backbone_sha256": "3035c92b350959924f9f00213499208652fc7ea050643e8b385c2dac08641f02",
+  "prompt_checkpoint": "third_party/AnomalyCLIP/checkpoints/9_12_4_multiscale_visa/epoch_15.pth",
+  "prompt_sha256": "415c5dcb52668b8c33fb9c1a351c686d632b919df5b384d63fa9ce7a2338ced4",
+  "prompt_source_training_data": "MVTec AD, including labeled normal and anomalous source images; no VisA fitting",
+  "checkpoint_provenance": "official train.sh second branch trains dataset=mvtec into _visa directory; test.sh second branch evaluates dataset=visa",
+  "prompt_parameters": {
+    "Prompt_length": 12,
+    "learnabel_text_embedding_depth": 9,
+    "learnabel_text_embedding_length": 4
+  },
+  "features_list": [
+    6,
+    12,
+    18,
+    24
+  ],
+  "DPAM_layer": 20,
+  "image_size": 448,
+  "official_default_image_size": 518,
+  "geometry": "official square bicubic resize and center crop, set to 448; differs from aspect-preserving template/AnomalyDINO geometry",
+  "comparison_note": "Optional zero-shot extension, not a matched few-shot reproduction or a Part 3 improvement; geometry and external supervision differ.",
+  "image_score": "official global image-text anomaly softmax probability, temperature .07; not anomaly-map maximum",
+  "pixel_score": "official four layer similarity maps summed, Gaussian sigma=4 at 448, bilinear restore to original image",
+  "map_storage": "float32 448-square NPZ before original-resolution restore",
+  "map_range": [
+    0,
+    4
+  ],
+  "precision": "FP32",
+  "calibration": "same 20 normal training images; score 95th percentile; no prompt selection",
+  "manifest_sha256": "03b472382af50c35350095c29bc95b4c21a7e609c927418e6715e883497a196e",
+  "target_fit_images": 0,
+  "target_normal_references": 0,
+  "inference_seed": 1,
+  "test_label_tuning": false,
+  "evaluation_sha256": "cd797d1c55bcdadcf2520de8306abbb3004775ee51dd9c417e13bcf70b11ff5b",
+  "common_sha256": "1fa67faaaaab2932ff6614983ed2136f722b2fdeacb3e7232c1f7ead1e267fc9",
+  "torch": "2.7.1+cu126"
+}

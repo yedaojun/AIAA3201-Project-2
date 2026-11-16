@@ -20,7 +20,7 @@ PARAMETERS = {'Prompt_length': 12, 'learnabel_text_embedding_depth': 9, 'learnab
 SIZE = 448
 
 
-def clip_settings():
+def clip_settings(seed=111):
     if not BACKBONE.is_file() or sha256(BACKBONE) != EXPECTED_BACKBONE:
         raise RuntimeError('Run tools/download_clip_weights.py to obtain verified official CLIP weights.')
     commit = subprocess.check_output(['git', '-C', str(VENDOR), 'rev-parse', 'HEAD'], text=True).strip()
@@ -42,17 +42,20 @@ def clip_settings():
         'map_storage': 'float32 448-square NPZ before original-resolution restore', 'map_range': [0, 4],
         'precision': 'FP32', 'calibration': 'same 20 normal training images; score 95th percentile; no prompt selection',
         'manifest_sha256': sha256(MANIFEST), 'target_fit_images': 0,
-        'target_normal_references': 0, 'inference_seed': 111, 'test_label_tuning': False,
+        'target_normal_references': 0, 'inference_seed': seed, 'test_label_tuning': False,
     }
 
 
 class AnomalyCLIPPredictor:
-    def __init__(self):
+    def __init__(self, seed=111):
         sys.path.insert(0, str(VENDOR))
         import AnomalyCLIP_lib
         from prompt_ensemble import AnomalyCLIP_PromptLearner
-        torch.manual_seed(111)
-        np.random.seed(111)
+        torch.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)
+        np.random.seed(seed)
+        torch.backends.cudnn.benchmark = False
+        torch.backends.cudnn.deterministic = True
         self.library = AnomalyCLIP_lib
         # Local verified path avoids upstream's hardcoded author-specific download directory.
         model, _ = AnomalyCLIP_lib.load(str(BACKBONE), device='cpu', design_details=PARAMETERS)

@@ -9,6 +9,14 @@ third_party/
 *.zip
 *.tar
 *.whl
+/video-production/node_modules/
+/video-production/out/
+/video-production/build/
+/video-production/voice-models/
+/video-production/public/user_audio/
+/output/video/*YourVoice*.mp4
+/output/video/*YourVoice*.wav
+/output/video/你的旁白_慢速试听.mp3
 
 # Local configuration and credentials
 .env

@@ -1,0 +1,32 @@
+{
+  "matched_configs": 72,
+  "all_references_identical": true,
+  "calibration_disjoint_all_configs": true,
+  "calibration_is_first_20_sorted_training_files": true,
+  "candle_case": {
+    "sample_id": "VisA/1cls/candle/test/bad/000.JPG",
+    "original_width": 1284,
+    "original_height": 1168,
+    "resized_width": 490,
+    "resized_height": 448,
+    "patch_grid": [
+      32,
+      35
+    ],
+    "original_defect_percent": 0.09501824350275254,
+    "resized_defect_bbox": [
+      20,
+      22
+    ],
+    "resized_defect_pixels": 211,
+    "max_patch_defect_occupancy": 0.3979591836734694,
+    "touched_patches": 6,
+    "score": 0.14788724617524582,
+    "threshold": 0.1765601322054863,
+    "raw_map_shape": [
+      32,
+      35
+    ]
+  },
+  "diagnostic_scope": "Saved predictions and nearest-neighbor-resized annotation only. No inference, tuning, or causal ablation."
+}

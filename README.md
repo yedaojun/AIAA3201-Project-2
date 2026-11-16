@@ -10,6 +10,7 @@
 数据集、模型权重、特征缓存、虚拟环境与完整逐图实验输出保留在本机，并由 `.gitignore` 排除。
 **当前完成 Part 1、Part 2 及各自的可选扩展；Part 3 尚未开展。**
 
+- [Part 1 / Part 2 要求核对与关键分析](docs/part1_part2_requirements_and_analysis.md)
 - [实验结果摘要与代表图](docs/RESULTS.md)
 - [Part 1 独立说明](Part1/README.md) / [Part 2 独立说明](Part2/README.md)
 - [完整流程总结](docs/WORKFLOW.md)
@@ -63,6 +64,22 @@ CLIP 骨干由单独下载脚本获取并校验。详细配置与监督条件见
 AnomalyCLIP 使用官方 MVTec AD 训练的提示权重，对 VisA 不训练、目标参考图数为 0。
 两者均使用每类额外 20 张正常图片校准阈值。它们作为不同监督条件的补充实验，
 不冒充 1/2/4/8-shot 对照，也不替代最终项目的 Part 3。
+
+### 可选扩展的三个种子
+
+两个扩展支持 `--seed`。使用种子 0、1、2 的完整独立重复实验：
+
+```powershell
+.\.venv-part2\Scripts\python.exe tools/run_optional_multiseed.py
+.\.venv-part2\Scripts\python.exe tools/audit_optional_multiseed.py
+.\.venv-part2\Scripts\python.exe tools/write_optional_multiseed_report.py
+```
+
+输出分别在 `results/part1_autoencoder_multiseed/seed_0` 至 `seed_2` 和
+`results/part2_anomalyclip_multiseed/seed_0` 至 `seed_2`，保留原来的 seed111 结果。
+自编码器固定拟合、验证和校准图片，改变模型初始化与训练顺序；AnomalyCLIP 使用同一固定权重重复推理。
+这些 seed 的含义与必做方法的参考分组不同。汇总先对六类等权平均，再计算三个种子的均值和样本标准差。
+逐图预测、全部训练图片名单和每轮训练损失均保留；详细结果见 [三种子实验说明](docs/optional_multiseed.md)。
 
 ## 环境
 
@@ -260,3 +277,7 @@ AnomalyCLIP 属于选做，不包含在此复现中。
 
 数据、压缩包、大型安装包和实验输出由 `.gitignore` 排除，不应上传到公开代码仓库。
 公开仓库应保留代码、manifest、依赖说明及适量代表性可视化，并在报告中引用上述数据和方法。
+
+## Presentation experiment provenance
+
+The current optional autoencoder result is **82.74% image AUROC / 69.59% pixel AUROC**, from training seeds 0, 1 and 2. The old seed111 summary (83.36% / 72.20%) is historical. See [per-seed configs, metrics and histories](docs/published_results/optional_multiseed/README.md) and [the protocol](docs/optional_multiseed.md). AnomalyCLIP uses a fixed model and prompts; its three inference repeats are **not a few-shot stability study**.

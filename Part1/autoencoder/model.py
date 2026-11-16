@@ -54,7 +54,8 @@ def training_split(category):
     calibration = load_manifest()['categories'][category]['calibration']
     pool = sorted(p.name for p in (DATA / category / 'train/good').iterdir() if p.is_file()
                   and p.name not in calibration)
-    permutation = np.random.default_rng(TRAIN_CONFIG['training_seed']).permutation(len(pool))
+    # Hold the normal fit/validation split fixed when comparing training seeds.
+    permutation = np.random.default_rng(TRAIN_CONFIG.get('split_seed', 111)).permutation(len(pool))
     n_val = max(1, int(round(len(pool) * TRAIN_CONFIG['normal_validation_fraction'])))
     validation = sorted(pool[i] for i in permutation[:n_val])
     fitting = sorted(pool[i] for i in permutation[n_val:])
