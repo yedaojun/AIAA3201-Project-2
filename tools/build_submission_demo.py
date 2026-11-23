@@ -80,7 +80,7 @@ def main():
         writer.writerows(rows)
 
     video = OUT / 'anomaly_demo.mp4'
-    writer = cv2.VideoWriter(str(video), cv2.VideoWriter_fourcc(*'mp4v'), FPS,
+    writer = cv2.VideoWriter(str(video), cv2.VideoWriter_fourcc(*'avc1'), FPS,
                              (WIDTH, HEIGHT))
     if not writer.isOpened():
         raise RuntimeError('OpenCV MP4 encoder could not start')
@@ -112,9 +112,11 @@ def main():
         writer.release()
     capture = cv2.VideoCapture(str(video))
     frames = int(capture.get(cv2.CAP_PROP_FRAME_COUNT))
+    codec_value = int(capture.get(cv2.CAP_PROP_FOURCC))
+    codec = ''.join(chr((codec_value >> (8 * index)) & 255) for index in range(4))
     capture.release()
-    if frames < 450:
-        raise RuntimeError(f'Incomplete demo video: {frames} frames')
+    if frames < 450 or codec.lower() not in ('h264', 'avc1'):
+        raise RuntimeError(f'Incomplete or non-H.264 demo video: {frames} frames, {codec}')
 
     archive = ROOT / 'anomaly_demo.zip'
     with ZipFile(archive, 'w', ZIP_DEFLATED, compresslevel=7) as output:

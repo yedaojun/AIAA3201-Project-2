@@ -14,7 +14,7 @@
 
 - 报告：`main.pdf`，9 页，其中正文及结论 8 页，参考文献第 9 页。
 - 仓库：`https://github.com/yedaojun/AIAA3201-Project-2`。GitHub 公共 API 以未登录请求返回 `private=false, visibility=public`；仓库 README 说明依赖、VisA 数据准备、权重来源、运行/评估命令，并展示代表性图片。
-- 演示包：项目根目录 `anomaly_demo.zip`，含 `anomaly_demo.mp4`、三张实际单图推理输出、逐例分数 CSV 与可重现命令。它用保存的四张参考图/group 0 双层 DINOv2 输出制作，展示正常 OK、缺陷 NG、剩余漏检三个例子；不是新模型实验或交互界面的实录。ZIP 经 `testzip()` 校验，MP4 为 1280×720、20 fps、25 秒。
+- 演示包：项目根目录 `anomaly_demo.zip`，含 `anomaly_demo.mp4`、三张实际单图推理输出、逐例分数 CSV 与可重现命令。它用保存的四张参考图/group 0 双层 DINOv2 输出制作，展示正常 OK、缺陷 NG、剩余漏检三个例子；不是新模型实验或交互界面的实录。ZIP 经 `testzip()` 校验，MP4 为 H.264、1280×720、20 fps、25 秒。
 
 ## 核验范围
 
