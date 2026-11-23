@@ -1,0 +1,28 @@
+{
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "shots": 4,
+  "reference_group": 0,
+  "queries_per_method": 120,
+  "timing_boundary": "same process and 120 fixed queries, all models/banks resident; each path warmed; alternating path order; synchronized GPU; decode, extraction, retrieval, map restoration included; setup/output/metrics excluded",
+  "memory_boundary": "max PyTorch allocated GPU tensor MiB during query, including resident weights; not total GPU device memory",
+  "official_448": {
+    "mean_ms": 274.91618333333463,
+    "peak_allocated_gpu_mib": 208.27685546875
+  },
+  "two_layer_a": {
+    "mean_ms": 361.59394083342704,
+    "peak_allocated_gpu_mib": 210.5283203125
+  },
+  "a_plus_anyup": {
+    "mean_ms": 528.9305366666667,
+    "peak_allocated_gpu_mib": 1074.0634765625
+  },
+  "official_672": {
+    "mean_ms": 679.7064350000861,
+    "peak_allocated_gpu_mib": 244.3291015625
+  },
+  "fixed_448_672": {
+    "mean_ms": 950.9534124999846,
+    "peak_allocated_gpu_mib": 244.3291015625
+  }
+}

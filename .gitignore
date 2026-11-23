@@ -17,6 +17,17 @@ third_party/
 /output/video/*YourVoice*.mp4
 /output/video/*YourVoice*.wav
 /output/video/你的旁白_慢速试听.mp3
+/output/submission/
+
+# Rebuilt LaTeX artifacts and local page previews
+/report/*.aux
+/report/*.bbl
+/report/*.blg
+/report/*.brf
+/report/*.log
+/report/*.out
+/report/*_check-*.png
+/report/tools/
 
 # Local configuration and credentials
 .env

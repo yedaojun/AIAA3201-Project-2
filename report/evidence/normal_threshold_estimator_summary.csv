@@ -1,0 +1,7 @@
+﻿method,estimator,settings,mean_bootstrap_threshold_sd,test_false_positives_total,test_false_negatives_total
+official_448,empirical_95p,18,0.015372144757264882,154,211
+official_448,gaussian_mean_plus_1.645sd,18,0.009924268944840255,152,194
+official_448,gumbel_95p,18,0.00941447437373944,142,190
+fixed_448_672,empirical_95p,18,0.0796456169247799,188,174
+fixed_448_672,gaussian_mean_plus_1.645sd,18,0.052295343410817166,186,178
+fixed_448_672,gumbel_95p,18,0.05118659493601212,183,180

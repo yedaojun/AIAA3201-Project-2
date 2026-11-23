@@ -1,6 +1,6 @@
 # AIAA3201 Project 2 — Few-Shot Industrial Visual Anomaly Detection
 
-本目录包含 **Part 1：RGB 模板差分基线** 和 **Part 2：官方 AnomalyDINO 复现**。
+本目录包含 **Part 1：RGB 模板差分基线**、**Part 2：官方 AnomalyDINO 复现** 和 **Part 3：改进与可靠性实验**。
 另有两个独立的可选扩展：**Part 1 卷积自编码器**、**Part 2 AnomalyCLIP**。
 以下命令均在本仓库根目录的 PowerShell 中运行。
 
@@ -8,13 +8,26 @@
 
 本仓库发布课程项目的实现、依赖、固定参考名单、测试、方法说明和少量代表性结果。
 数据集、模型权重、特征缓存、虚拟环境与完整逐图实验输出保留在本机，并由 `.gitignore` 排除。
-**当前完成 Part 1、Part 2 及各自的可选扩展；Part 3 尚未开展。**
+**Part 1、Part 2 和 Part 3 的主要评估已完成。Part 3 的预先固定主改进是双层 DINOv2 特征 A；448+672 多尺度、AnyUp、D/F 与 B/C/E 属于独立的补充或探索实验，监督和验证范围在报告中分别说明。**
 
 - [Part 1 / Part 2 要求核对与关键分析](docs/part1_part2_requirements_and_analysis.md)
 - [实验结果摘要与代表图](docs/RESULTS.md)
 - [Part 1 独立说明](Part1/README.md) / [Part 2 独立说明](Part2/README.md)
 - [完整流程总结](docs/WORKFLOW.md)
+- [Part 3 实验设置和当前结果](part3/PILOT_RESULTS.md) / [D、F 完整对比与限制](part3/DF_RESULTS.md) / [B、C、E 初步实验](part3/BCE_PILOT.md)
 - [第三方代码、预训练模型及数据来源](THIRD_PARTY_NOTICES.md)
+- [最终 CVPR 格式报告（LaTeX 与 PDF）](report/README.md)
+
+### 最终报告与演示
+
+- [报告 PDF](report/main.pdf)：正文 8 页，参考文献第 9 页；摘要末尾含公开仓库完整地址。
+- [Part 3 实验与审阅记录](report/FINAL_REVIEW_V4_RESPONSE_2026-11-24.md)：说明主实验、探索性实验和提交核验。
+- 交互式单图命令：`.\.venv-part2\Scripts\python.exe -m part3.demo --image data/VisA_pytorch/1cls/candle/test/good/0011.JPG --category candle --shots 4 --seed 0 --mode multilayer --map-restoration official`。输出图像级分数、正常阈值、OK/NG、热力图及叠加图。可替换 `--image` 和对应 `--category`。
+- Canvas 演示包 `anomaly_demo.zip` 在本地由 `python tools/build_submission_demo.py` 生成，含 25 秒的真实预测结果演示视频、三张代表性输出及逐例 CSV。数据集和预训练权重需按下文准备，演示包不包含原始数据。
+
+四张正常参考图、三组参考库时，官方 DINO 的六类宏平均图像 AUROC 为 **96.15 ± 0.49%**，预先固定的双层 A 为 **96.45 ± 0.38%**。后验多尺度 448+672 为 **96.74 ± 0.27%**，但四张参考图的阈值错判仅从 365 降到 362，并有新增正常品误报。三组精确原图尺寸像素 AP：官方 **47.93%**、A **48.59%**、A+AnyUp **58.69%**。详细设置、耗时和负结果见报告。
+
+![Part 3 image AUROC and defect-size comparison](docs/figures/part3_followup_allshots.png)
 
 新电脑可以按下面的顺序准备（本次实测 Python 3.11、CUDA PyTorch 2.7.1）：
 
@@ -281,3 +294,7 @@ AnomalyCLIP 属于选做，不包含在此复现中。
 ## Presentation experiment provenance
 
 The current optional autoencoder result is **82.74% image AUROC / 69.59% pixel AUROC**, from training seeds 0, 1 and 2. The old seed111 summary (83.36% / 72.20%) is historical. See [per-seed configs, metrics and histories](docs/published_results/optional_multiseed/README.md) and [the protocol](docs/optional_multiseed.md). AnomalyCLIP uses a fixed model and prompts; its three inference repeats are **not a few-shot stability study**.
+
+## Part 3: Multi-layer features, score fusion and reliable decisions
+
+Part 3 evaluates frozen multi-layer DINO features, calibrated image-score fusion with AnomalyCLIP, selective `REVIEW` decisions, and pretrained AnyUp anomaly-map restoration. It preserves the fixed VisA references and normal calibration images. See [the protocol and reproducible commands](part3/README.md), [the A and AnyUp results](part3/PILOT_RESULTS.md), and [the completed D/F comparison](part3/DF_RESULTS.md).

@@ -1,0 +1,45 @@
+{
+  "total_rows": 11520,
+  "by_shot": {
+    "1": {
+      "FN_to_FN": 215,
+      "TP_to_TP": 1488,
+      "TP_to_FN": 27,
+      "FN_to_TP": 70,
+      "TN_to_TN": 884,
+      "FP_to_FP": 123,
+      "TN_to_FP": 39,
+      "FP_to_TN": 34
+    },
+    "2": {
+      "FN_to_FN": 162,
+      "TP_to_TP": 1551,
+      "FN_to_TP": 68,
+      "TN_to_TN": 866,
+      "FP_to_TN": 27,
+      "FP_to_FP": 127,
+      "TN_to_FP": 60,
+      "TP_to_FN": 19
+    },
+    "4": {
+      "FN_to_FN": 162,
+      "TP_to_TP": 1577,
+      "FN_to_TP": 49,
+      "TN_to_TN": 873,
+      "FP_to_FP": 135,
+      "FP_to_TN": 19,
+      "TN_to_FP": 53,
+      "TP_to_FN": 12
+    },
+    "8": {
+      "FN_to_TP": 48,
+      "TP_to_TP": 1624,
+      "FN_to_FN": 121,
+      "TN_to_TN": 857,
+      "TN_to_FP": 52,
+      "FP_to_FP": 141,
+      "FP_to_TN": 30,
+      "TP_to_FN": 7
+    }
+  }
+}

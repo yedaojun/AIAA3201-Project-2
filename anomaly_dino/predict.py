@@ -29,20 +29,21 @@ class OfficialPredictor:
         self.index = faiss.IndexFlatL2(bank.shape[1])
         self.index.add(bank)
 
-    def predict(self, path):
+    def predict(self, path, *, restore_map=None):
         started = perf_counter()
         image = cv2.cvtColor(cv2.imread(str(path)), cv2.COLOR_BGR2RGB)
         tensor, grid = self.model.prepare_image(str(path))
-        features = self.model.extract_features(tensor)
-        mask = self.model.compute_background_mask(features, grid, threshold=10, masking_type=True)
-        features = features[mask]
+        patch_features = self.model.extract_features(tensor)
+        mask = self.model.compute_background_mask(patch_features, grid, threshold=10, masking_type=True)
+        features = patch_features[mask]
         faiss.normalize_L2(features)
         distances, _ = self.index.search(features, k=1)
         output = np.zeros_like(mask, dtype=float)
         output[mask] = (distances / 2).squeeze()
         patch = output.reshape(grid)
         score = float(post_eval.mean_top1p(output))
-        dense = utils.dists2map(patch, image.shape)
+        dense = (utils.dists2map(patch, image.shape) if restore_map is None
+                 else restore_map(tensor, patch_features, patch, image.shape))
         torch.cuda.synchronize()
         return score, dense, patch, perf_counter() - started
 

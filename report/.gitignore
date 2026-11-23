@@ -1,0 +1,10 @@
+# Temporary LaTeX build files and local rendering checks.
+*.aux
+*.bbl
+*.blg
+*.brf
+*.log
+*.out
+*.synctex.gz
+render/
+tools/

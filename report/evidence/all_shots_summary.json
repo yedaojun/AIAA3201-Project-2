@@ -1,0 +1,110 @@
+{
+  "protocol": "six categories, 1/2/4/8 references, groups 0/1/2, identical filenames; post-hoc 672 and fusion on the same VisA test split",
+  "settings": 72,
+  "by_shot": {
+    "1": {
+      "official": {
+        "image_auroc_mean": 0.9460796296296295,
+        "image_auroc_sample_sd": 0.010278090585830317,
+        "FP": 157,
+        "FN": 285
+      },
+      "two_layer": {
+        "image_auroc_mean": 0.9474240740740741,
+        "image_auroc_sample_sd": 0.00985167362690361,
+        "FP": 124,
+        "FN": 310
+      },
+      "high_res": {
+        "image_auroc_mean": 0.9496814814814815,
+        "image_auroc_sample_sd": 0.0037900630851345853,
+        "FP": 197,
+        "FN": 245
+      },
+      "fusion": {
+        "image_auroc_mean": 0.9548537037037037,
+        "image_auroc_sample_sd": 0.005377859082642285,
+        "FP": 162,
+        "FN": 242
+      }
+    },
+    "2": {
+      "official": {
+        "image_auroc_mean": 0.9532537037037038,
+        "image_auroc_sample_sd": 0.0056860923392549655,
+        "FP": 154,
+        "FN": 230
+      },
+      "two_layer": {
+        "image_auroc_mean": 0.9546666666666668,
+        "image_auroc_sample_sd": 0.0053513786154991356,
+        "FP": 151,
+        "FN": 230
+      },
+      "high_res": {
+        "image_auroc_mean": 0.9576296296296297,
+        "image_auroc_sample_sd": 0.0038044578032821737,
+        "FP": 214,
+        "FN": 192
+      },
+      "fusion": {
+        "image_auroc_mean": 0.9611796296296297,
+        "image_auroc_sample_sd": 0.0038984498871518915,
+        "FP": 187,
+        "FN": 181
+      }
+    },
+    "4": {
+      "official": {
+        "image_auroc_mean": 0.9615185185185186,
+        "image_auroc_sample_sd": 0.0049120107689456845,
+        "FP": 154,
+        "FN": 211
+      },
+      "two_layer": {
+        "image_auroc_mean": 0.9645444444444444,
+        "image_auroc_sample_sd": 0.0038170709797170125,
+        "FP": 182,
+        "FN": 199
+      },
+      "high_res": {
+        "image_auroc_mean": 0.9629185185185185,
+        "image_auroc_sample_sd": 0.0023891623443832105,
+        "FP": 198,
+        "FN": 191
+      },
+      "fusion": {
+        "image_auroc_mean": 0.967387037037037,
+        "image_auroc_sample_sd": 0.0026835192788880677,
+        "FP": 188,
+        "FN": 174
+      }
+    },
+    "8": {
+      "official": {
+        "image_auroc_mean": 0.9661574074074074,
+        "image_auroc_sample_sd": 0.00697995660722057,
+        "FP": 171,
+        "FN": 169
+      },
+      "two_layer": {
+        "image_auroc_mean": 0.9684592592592592,
+        "image_auroc_sample_sd": 0.0074214494219548835,
+        "FP": 166,
+        "FN": 164
+      },
+      "high_res": {
+        "image_auroc_mean": 0.9682,
+        "image_auroc_sample_sd": 0.005588466407711786,
+        "FP": 214,
+        "FN": 149
+      },
+      "fusion": {
+        "image_auroc_mean": 0.9721851851851852,
+        "image_auroc_sample_sd": 0.00600425860528826,
+        "FP": 193,
+        "FN": 128
+      }
+    }
+  }
+}
