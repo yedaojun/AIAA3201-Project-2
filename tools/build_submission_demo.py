@@ -1,7 +1,7 @@
 """Package real, already-run demo predictions as the required MP4 and ZIP.
 
 This script performs no model inference and reads only saved single-image demo
-outputs. Run the three commands in output/submission/README.md first if needed.
+outputs. Run the three commands in submission_demo_README.md first if needed.
 """
 
 import csv
@@ -56,6 +56,7 @@ def canvas(title, subtitle, panel=None, footer=''):
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(ROOT / 'tools/submission_demo_README.md', OUT / 'README.md')
     examples = OUT / 'examples'
     examples.mkdir(exist_ok=True)
     rows = []
